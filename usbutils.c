@@ -262,6 +262,60 @@ static struct usb_intinfo kli_ints[] = {
 };
 #endif
 
+#ifdef USE_HEXMINERA
+static struct usb_epinfo hexa_epinfos[] = {
+	{ LIBUSB_TRANSFER_TYPE_BULK,	64,	EPI(2), 0, 0 },
+	{ LIBUSB_TRANSFER_TYPE_BULK,	64,	EPO(2), 0, 0 }
+};
+static struct usb_intinfo hexa_ints[] = {
+	USB_EPS(1, hexa_epinfos)
+};
+#endif
+#ifdef USE_HEXMINERB
+static struct usb_epinfo hexb_epinfos[] = {
+	{ LIBUSB_TRANSFER_TYPE_BULK,	64,	EPI(2), 0, 0 },
+	{ LIBUSB_TRANSFER_TYPE_BULK,	64,	EPO(2), 0, 0 }
+};
+static struct usb_intinfo hexb_ints[] = {
+	USB_EPS(1, hexb_epinfos)
+};
+#endif
+#ifdef USE_HEXMINER8
+static struct usb_epinfo hex8_epinfos[] = {
+	{ LIBUSB_TRANSFER_TYPE_BULK,	64,	EPI(2), 0, 0 },
+	{ LIBUSB_TRANSFER_TYPE_BULK,	64,	EPO(2), 0, 0 }
+};
+static struct usb_intinfo hex8_ints[] = {
+	USB_EPS(1, hex8_epinfos)
+};
+#endif
+#ifdef USE_HEXMINER3
+static struct usb_epinfo hex3_epinfos[] = {
+	{ LIBUSB_TRANSFER_TYPE_BULK,	64,	EPI(2), 0, 0 },
+	{ LIBUSB_TRANSFER_TYPE_BULK,	64,	EPO(2), 0, 0 }
+};
+static struct usb_intinfo hex3_ints[] = {
+	USB_EPS(1, hex3_epinfos)
+};
+#endif
+#ifdef USE_HEXMINERC
+static struct usb_epinfo hexc_epinfos[] = {
+	{ LIBUSB_TRANSFER_TYPE_BULK,	64,	EPI(2), 0, 0 },
+	{ LIBUSB_TRANSFER_TYPE_BULK,	64,	EPO(2), 0, 0 }
+};
+static struct usb_intinfo hexc_ints[] = {
+	USB_EPS(1, hexc_epinfos)
+};
+#endif
+#ifdef USE_HEXMINERU
+static struct usb_epinfo hexu_epinfos[] = {
+	{ LIBUSB_TRANSFER_TYPE_INTERRUPT,	64,	EPI(1), 0, 0 },
+	{ LIBUSB_TRANSFER_TYPE_INTERRUPT,	64,	EPO(1), 0, 0 }
+};
+static struct usb_intinfo hexu_ints[] = {
+	USB_EPS(0, hexu_epinfos)
+};
+#endif
 #ifdef USE_ICARUS
 static struct usb_epinfo ica_epinfos[] = {
 	{ LIBUSB_TRANSFER_TYPE_BULK,	64,	EPI(3), 0, 0 },
@@ -463,6 +517,7 @@ static struct usb_find_devices find_dev[] = {
 		.latency = LATENCY_UNUSED,
 		INTINFO(mmq_ints) },
 #endif
+
 #ifdef USE_AVALON
 	{
 		.drv = DRIVER_avalon,
@@ -535,6 +590,95 @@ static struct usb_find_devices find_dev[] = {
 		.latency = 10,
 		INTINFO(kli_ints) },
 #endif
+#ifdef USE_HEXMINERB //04d8:000a or //04d8:000b
+	{
+		.drv = DRIVER_hexminerb,
+		.name = "HEXb",
+		.ident = IDENT_HEXB,
+		.idVendor = 0x04D8,
+		.idProduct = 0x000B,
+		.iProduct = "HEX16B-Bitfury ASIC Miner",
+		.config = 1,
+		.timeout = 100,
+		.latency = LATENCY_UNUSED,
+		 INTINFO(hexb_ints) },
+	{	 
+		.drv = DRIVER_hexminerb,
+		.name = "HEXb",
+		.ident = IDENT_HEXB,
+		.idVendor = 0x04D8,
+		.idProduct = 0x000A,
+		.iProduct = "HEX16B-Bitfury ASIC Miner",
+		.config = 1,
+		.timeout = 100,
+		.latency = LATENCY_UNUSED,
+		 INTINFO(hexb_ints) },
+#endif
+#ifdef USE_HEXMINER8 //04d8:000a 
+	{	 
+		.drv = DRIVER_hexminer8,
+		.name = "HEX8",
+		.ident = IDENT_HEX8,
+		.idVendor = 0x04D8,
+		.idProduct = 0x000A,
+		.iProduct = "HEX8A1-CoinCraft ASIC Miner",
+		.config = 1,
+		.timeout = 100,
+		.latency = LATENCY_UNUSED,
+		 INTINFO(hex8_ints) },
+#endif
+
+#ifdef USE_HEXMINER3 //04d8:000a 
+	{	 
+		.drv = DRIVER_hexminer3,
+		.name = "HEX3",
+		.ident = IDENT_HEX3,
+		.idVendor = 0x04D8,
+		.idProduct = 0x000A,
+		.iProduct = "HEX3A3-Avalon3 ASIC Miner",
+		.config = 1,
+		.timeout = 100,
+		.latency = LATENCY_UNUSED,
+		 INTINFO(hex3_ints) },
+#endif
+#ifdef USE_HEXMINERC //04d8:000a
+	{
+		.drv = DRIVER_hexminerc,
+		.name = "HEXc",
+		.ident = IDENT_HEXC,
+		.idVendor = 0x04D8,
+		.idProduct = 0x000A,
+		.iProduct = "HEX16C-Avalon2 ASIC Miner",
+		.config = 1,
+		.timeout = 100,
+		.latency = LATENCY_UNUSED,
+		 INTINFO(hexc_ints) },
+#endif
+#ifdef USE_HEXMINERU //04d8:000a
+	{
+		.drv = DRIVER_hexmineru,
+		.name = "HEXu",
+		.ident = IDENT_HEXU,
+		.idVendor = 0x04D8,
+		.idProduct = 0x00DE,
+		.config = 1,
+		.timeout = 100,
+		.latency = LATENCY_UNUSED,
+		 INTINFO(hexu_ints) },
+#endif
+#ifdef USE_HEXMINERA //04d8:000a
+	{
+		.drv = DRIVER_hexminera,
+		.name = "HEXa",
+		.ident = IDENT_HEXA,
+		.idVendor = 0x04D8,
+		.idProduct = 0x000A,
+		.iProduct = "HEX16A-Avalon1 ASIC Miner",
+		.config = 1,
+		.timeout = 100,
+		.latency = LATENCY_UNUSED,
+		 INTINFO(hexa_ints) },
+#endif 
 #ifdef USE_ICARUS
 	{
 		.drv = DRIVER_icarus,
@@ -939,7 +1083,6 @@ static bool setgetdes(ssize_t count, libusb_device *dev, struct libusb_device_ha
 {
 	char tmp[512];
 	int err;
-
 	err = libusb_set_configuration(handle, cd);
 	if (err) {
 		snprintf(tmp, sizeof(tmp), EOL "  ** dev %d: Failed to set config descriptor to %d, err %d",
@@ -1024,6 +1167,7 @@ static void usb_full(ssize_t *count, libusb_device *dev, char **buf, size_t *off
 	append(buf, tmp, off, len);
 
 	err = libusb_open(dev, &handle);
+	
 	if (err) {
 		snprintf(tmp, sizeof(tmp), EOL "  ** dev %d: Failed to open, err %d", (int)(*count), err);
 		append(buf, tmp, off, len);
@@ -1659,7 +1803,7 @@ static void _usb_uninit(struct cgpu_info *cgpu)
 						 THISIF(cgpu->usbdev->found, ifinfo));
 		}
 #ifdef LINUX
-		libusb_attach_kernel_driver(cgpu->usbdev->handle, THISIF(cgpu->usbdev->found, ifinfo));
+		//libusb_attach_kernel_driver(cgpu->usbdev->handle, THISIF(cgpu->usbdev->found, ifinfo));
 #endif
 		cg_wlock(&cgusb_fd_lock);
 		libusb_close(cgpu->usbdev->handle);
@@ -1806,7 +1950,6 @@ struct cgpu_info *usb_alloc_cgpu(struct device_drv *drv, int threads)
 
 	if (unlikely(!cgpu))
 		quit(1, "Failed to calloc cgpu for %s in usb_alloc_cgpu", drv->dname);
-
 	cgpu->drv = drv;
 	cgpu->deven = DEV_ENABLED;
 	cgpu->threads = threads;
@@ -1963,16 +2106,52 @@ static int _usb_init(struct cgpu_info *cgpu, struct libusb_device *dev, struct u
 
 	if (found->iProduct) {
 		unsigned char prod[STRBUFLEN+1];
-
+    
 		err = libusb_get_string_descriptor_ascii(cgusb->handle,
 							 cgusb->descriptor->iProduct,
 							 prod, STRBUFLEN);
 		if (err < 0) {
+		
+			#if defined(USE_HEXMINERA) || defined(USE_HEXMINERB) || defined(USE_HEXMINERC) || defined(USE_HEXMINER8) || defined(USE_HEXMINER3)
+				bzero(prod,STRBUFLEN);
+			#if defined(USE_HEXMINERA)
+			if(found->ident == IDENT_HEXA && default_hex_miner == D_HEXA) {
+				strcpy(prod, "HEX16A-Avalon1 ASIC Miner");
+			} 
+			#endif
+			
+			#if defined(USE_HEXMINERB)
+			if(found->ident == IDENT_HEXB && default_hex_miner == D_HEXB) {
+				strcpy(prod, "HEX16B-Bitfury ASIC Miner");
+			} 
+			#endif
+			
+		  #if defined(USE_HEXMINERC)
+			if(found->ident == IDENT_HEXC && default_hex_miner == D_HEXC) {
+				strcpy(prod, "HEX16C-Avalon2 ASIC Miner");
+			} 
+			#endif
+			
+      #if defined(USE_HEXMINER8)
+			if(found->ident == IDENT_HEX8 && default_hex_miner == D_HEX8) {
+				strcpy(prod, "HEX8A1-CoinCraft ASIC Miner");
+			} 
+			#endif
+			#if defined(USE_HEXMINER3)
+			if(found->ident == IDENT_HEX3 && default_hex_miner == D_HEX3) {
+				strcpy(prod, "HEX3A3-Avalon3 ASIC Miner");
+			} 
+			#endif
+			#else
+			
 			applog(LOG_DEBUG,
 				"USB init, failed to get iProduct, err %d %s",
 				err, devstr);
 			goto cldame;
+			#endif
+			
 		}
+		
 		if (strcmp((char *)prod, found->iProduct)) {
 			applog(LOG_DEBUG, "USB init, iProduct mismatch %s",
 			       devstr);
@@ -2103,11 +2282,34 @@ static int _usb_init(struct cgpu_info *cgpu, struct libusb_device *dev, struct u
 
 	err = libusb_get_string_descriptor_ascii(cgusb->handle,
 				cgusb->descriptor->iProduct, strbuf, STRBUFLEN);
+	#if defined(USE_HEXMINERA) || defined(USE_HEXMINERB) || defined(USE_HEXMINERC) || defined(USE_HEXMINER8) || defined(USE_HEXMINER3)
+	  	if (err > 0)
+		cgusb->prod_string = strdup((char *)strbuf);
+	else {
+		#if defined(USE_HEXMINERA)
+		if(default_hex_miner == D_HEXA) cgusb->prod_string = strdup((char *)"HEX16A-Avalon1 ASIC Miner");
+		#endif
+		#if defined(USE_HEXMINERB)
+		if(default_hex_miner == D_HEXB) cgusb->prod_string = strdup((char *)"HEX16B-Bitfury ASIC Miner");
+		#endif
+		#if defined(USE_HEXMINERC)
+		if(default_hex_miner == D_HEXC) cgusb->prod_string = strdup((char *)"HEX16C-Avalon2 ASIC Miner");
+		#endif
+		#if defined(USE_HEXMINER8)
+		if(default_hex_miner == D_HEX8) cgusb->prod_string = strdup((char *)"HEX8A1-CoinCraft ASIC Miner");
+		#endif
+		#if defined(USE_HEXMINER3)
+		if(default_hex_miner == D_HEX3) cgusb->prod_string = strdup((char *)"HEX3A3-Avalon3 ASIC Miner");
+		#endif
+
+		
+	}
+	#else
 	if (err > 0)
 		cgusb->prod_string = strdup((char *)strbuf);
 	else
 		cgusb->prod_string = (char *)BLANK;
-
+  #endif
 	err = libusb_get_string_descriptor_ascii(cgusb->handle,
 				cgusb->descriptor->iManufacturer, strbuf, STRBUFLEN);
 	if (err > 0)
@@ -2155,7 +2357,7 @@ reldame:
 
 cldame:
 #ifdef LINUX
-	libusb_attach_kernel_driver(cgusb->handle, THISIF(found, ifinfo));
+	//libusb_attach_kernel_driver(cgusb->handle, THISIF(found, ifinfo));
 
 nokernel:
 #endif
@@ -2336,7 +2538,7 @@ void __usb_detect(struct device_drv *drv, struct cgpu_info *(*device_detect)(str
 				drv->dname, drv_count[drv->drv_id].limit);
 			break;
 		}
-
+    
 		found = usb_check(drv, list[i]);
 		if (found != NULL) {
 			bool new_dev = false;
@@ -3463,6 +3665,12 @@ void usb_cleanup(void)
 	for (i = 0; i < total_devices; i++) {
 		cgpu = devices[i];
 		switch (cgpu->drv->drv_id) {
+			case DRIVER_hexminera:
+			case DRIVER_hexminerb:
+			case DRIVER_hexminerc:
+			case DRIVER_hexmineru:
+			case DRIVER_hexminer8:
+			case DRIVER_hexminer3:
 			case DRIVER_bflsc:
 			case DRIVER_bitforce:
 			case DRIVER_bitfury:

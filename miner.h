@@ -236,6 +236,12 @@ static inline int fsync (int fd)
 	DRIVER_ADD_COMMAND(modminer)
 
 #define ASIC_PARSE_COMMANDS(DRIVER_ADD_COMMAND) \
+	DRIVER_ADD_COMMAND(hexminera) \
+	DRIVER_ADD_COMMAND(hexminerb) \
+	DRIVER_ADD_COMMAND(hexminerc) \
+	DRIVER_ADD_COMMAND(hexminer8) \
+	DRIVER_ADD_COMMAND(hexminer3) \
+	DRIVER_ADD_COMMAND(hexmineru) \
 	DRIVER_ADD_COMMAND(bflsc) \
 	DRIVER_ADD_COMMAND(bitfury) \
 	DRIVER_ADD_COMMAND(cointerra) \
@@ -282,6 +288,17 @@ enum pool_strategy {
 	POOL_LOADBALANCE,
 	POOL_BALANCE,
 };
+#if defined(USE_HEXMINERA) || defined(USE_HEXMINERB) || defined(USE_HEXMINERC) || defined(USE_HEXMINERU) || defined(USE_HEXMINER8) || defined(USE_HEXMINER3)
+
+enum default_hex_miner {
+	D_HEXA,
+	D_HEXB,
+	D_HEXC,
+	D_HEX8,
+	D_HEX3,
+};
+extern enum default_hex_miner default_hex_miner;
+#endif
 
 #define TOP_STRATEGY (POOL_BALANCE)
 
@@ -433,6 +450,12 @@ struct cgpu_info {
 	struct cg_usb_device *usbdev;
 	struct cg_usb_info usbinfo;
 	bool blacklisted;
+#endif
+#ifdef USE_HEXMINERU
+	// http://ww1.microchip.com/downloads/en/DeviceDoc/22288A.pdf pg 34
+	uint8_t cfg_spi[0x11];
+	// http://ww1.microchip.com/downloads/en/DeviceDoc/22288A.pdf pg 40
+	uint8_t cfg_gpio[0xf];
 #endif
 #if defined(USE_AVALON) || defined(USE_AVALON2)
 	struct work **works;
@@ -1008,6 +1031,25 @@ extern char *opt_bitmine_a1_options;
 extern char *opt_bitmain_options;
 extern bool opt_bitmain_hwerror;
 #endif
+
+#ifdef USE_HEXMINERA
+extern char *opt_hexminera_options;
+#endif
+#ifdef USE_HEXMINERB
+extern char *opt_hexminerb_options;
+#endif
+#ifdef USE_HEXMINERC
+extern char *opt_hexminerc_options;
+#endif
+#ifdef USE_HEXMINER8
+extern char *opt_hexminer8_options;
+#endif
+#ifdef USE_HEXMINER3
+extern char *opt_hexminer3_options;
+#endif
+#ifdef USE_HEXMINERU
+extern char *opt_hexmineru_options;
+#endif
 #ifdef USE_USBUTILS
 extern char *opt_usb_select;
 extern int opt_usbdump;
@@ -1355,6 +1397,10 @@ struct work {
 	struct timeval	tv_work_start;
 	struct timeval	tv_work_found;
 	char		getwork_mode;
+	
+#if defined(USE_HEXMINERA) || defined(USE_HEXMINERB) || defined(USE_HEXMINERC) || defined(USE_HEXMINERU) || defined(USE_HEXMINER8) || defined(USE_HEXMINER3)
+	bool ping;
+#endif
 };
 
 #ifdef USE_MODMINER
@@ -1402,6 +1448,9 @@ extern void inc_hw_errors(struct thr_info *thr);
 extern bool test_nonce(struct work *work, uint32_t nonce);
 extern bool test_nonce_diff(struct work *work, uint32_t nonce, double diff);
 extern bool submit_tested_work(struct thr_info *thr, struct work *work);
+#if defined(USE_HEXMINERA) || defined(USE_HEXMINERB) || defined(USE_HEXMINERC) || defined(USE_HEXMINERU)  || defined(USE_HEXMINER8) || defined(USE_HEXMINER3)
+extern bool submit_tested_work_no_clone(struct thr_info *thr, struct work *work, bool diff1);
+#endif
 extern bool submit_nonce(struct thr_info *thr, struct work *work, uint32_t nonce);
 extern bool submit_noffset_nonce(struct thr_info *thr, struct work *work, uint32_t nonce,
 			  int noffset);

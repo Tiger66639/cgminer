@@ -137,6 +137,12 @@ enum sub_ident {
 	IDENT_AMU,
 	IDENT_ANT,
 	IDENT_ANU,
+	IDENT_HEXA,
+	IDENT_HEXB,
+	IDENT_HEXC,
+	IDENT_HEXU,
+	IDENT_HEX8,
+	IDENT_HEX3,
 	IDENT_AVA,
 	IDENT_BAJ,
 	IDENT_BAL,
@@ -562,5 +568,5 @@ void initialise_usblocks(void);
 
 #define usb_transfer_read(cgpu, typ, req, val, idx, buf, bufsiz, read, cmd) \
 	_usb_transfer_read(cgpu, typ, req, val, idx, buf, bufsiz, read, DEVTIMEOUT, cmd)
-
+	
 #endif

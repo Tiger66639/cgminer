@@ -54,9 +54,9 @@ if WANT_USBUTILS
 cgminer_SOURCES += usbutils.c usbutils.h
 endif
 
-if WANT_LIBBITFURY
-cgminer_SOURCES += libbitfury.c libbitfury.h mcp2210.c mcp2210.h
-endif
+#if WANT_LIBBITFURY
+#cgminer_SOURCES += libbitfury.c libbitfury.h mcp2210.c mcp2210.h
+#endif
 
 # Device drivers
 if HAS_AVALON
@@ -118,6 +118,30 @@ endif
 
 if HAS_ANT_S1
 cgminer_SOURCES += driver-bitmain.c driver-bitmain.h
+endif
+
+if HAS_HEXMINERA
+cgminer_SOURCES += driver-hexminera.c driver-hexminera.h
+endif
+
+if HAS_HEXMINERB
+cgminer_SOURCES += driver-hexminerb.c driver-hexminerb.h
+endif
+
+if HAS_HEXMINERC
+cgminer_SOURCES += driver-hexminerc.c driver-hexminerc.h
+endif
+
+if HAS_HEXMINER8
+cgminer_SOURCES += driver-hexminer8.c driver-hexminer8.h
+endif
+
+if HAS_HEXMINER3
+cgminer_SOURCES += driver-hexminer3.c driver-hexminer3.h
+endif
+
+if HAS_HEXMINERU
+cgminer_SOURCES += driver-hexmineru.c driver-hexmineru.h
 endif
 
 if HAS_MODMINER
