@@ -4,8 +4,7 @@ This code is provided entirely free of charge by the programmer in his spare
 time so donations would be greatly appreciated. Please consider donating to the
 address below.
 
-Con Kolivas <kernel@kolivas.org>
-15qSxP1SQcUX3o4nhkfdbgyoWEFMomJ4rZ
+
 
 
 
