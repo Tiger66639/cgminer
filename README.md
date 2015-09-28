@@ -7,21 +7,13 @@ address below.
 Con Kolivas <kernel@kolivas.org>
 15qSxP1SQcUX3o4nhkfdbgyoWEFMomJ4rZ
 
-DOWNLOADS:
 
-http://ck.kolivas.org/apps/cgminer
 
 GIT TREE:
 
-https://github.com/ckolivas/cgminer
+https://github.com/Tiger66639/cgminer
 
-Support thread:
 
-http://bitcointalk.org/index.php?topic=28402.0
-
-IRC Channel:
-
-irc://irc.freenode.net/cgminer
 
 License: GPLv3.  See COPYING for details.
 
